@@ -1,0 +1,9 @@
+# .gitignore
+data/           # CSVs are too large for GitHub
+.DS_Store
+.vscode/
+__pycache__/
+*.pyc
+.env
+*.log
+checkpoint.json
