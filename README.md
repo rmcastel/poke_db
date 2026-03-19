@@ -1,7 +1,7 @@
 # Poke DB
 
 A data pipeline that extracts Pokémon data from [PokeAPI](https://pokeapi.co/) 
-into structured CSVs for analysis.
+into structured CSVs as well as a .db file for analysis.
 
 ## Data Model
 | Table | Description |
@@ -11,7 +11,7 @@ into structured CSVs for analysis.
 | dim_stats | Base stats per Pokémon |
 | dim_types | Type assignments |
 | dim_abilities | Ability mappings |
-| fact_moves | Move details and flavor text |
+| fact_moves | Move details and flavor text (en)|
 | fact_abilities | Ability descriptions by version |
 | fact_versions | Game version metadata |
 

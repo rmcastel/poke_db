@@ -1,5 +1,5 @@
 # .gitignore
-data/           # CSVs are too large for GitHub
+data/
 .DS_Store
 .vscode/
 __pycache__/
