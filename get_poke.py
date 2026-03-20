@@ -458,8 +458,8 @@ table_dict={
 
 for i in table_dict:
     print(i)
-    make_directory(f'{wd}/data/{i}/raw/{year}/{month}') #data/raw/year/month directory
-    file_name=f'{wd}/data/{i}/raw/{year}/{month}'+f'/{i}_{today_str}.csv'
+    make_directory(f'{wd}/data/{i}') # data/raw/{year}/{month}
+    file_name=f'{wd}/data/{i}'+f'/{i}_{today_str}.csv'
     with open(file_name, 'w', newline='', encoding='utf-8') as out:
         writer = csv.writer(out, quoting=csv.QUOTE_MINIMAL)
         writer.writerow( table_dict[i][0] )
