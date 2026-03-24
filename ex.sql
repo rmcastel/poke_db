@@ -1,9 +1,11 @@
-SELECT *
+SELECT pk.*
+      ,fm.name as move_name
+      ,fm.power
+      ,fm.accuracy
 FROM   pokemon.fact_pokemon pk
-JOIN   (
-       SELECT *
-       FROM   pokemon.dim_moves
-       WHERE  version_group = 'diamond-pearl'
-       ) mv
-on     pk.id = mv.id
-;
+JOIN   pokemon.dim_moves mv
+ON     pk.id = mv.id
+AND    mv.version_group = 'diamond-pearl'
+JOIN   pokemon.fact_moves fm
+ON     mv.move = fm.name
+AND    fm.version = 'diamond-pearl'
