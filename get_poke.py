@@ -26,11 +26,12 @@ year=today.strftime(f'%Y')
 wd=os.getcwd()
 
 
-base_url=fr'https://pokeapi.co/api/v2/pokemon/'
-base_ability_url=fr'https://pokeapi.co/api/v2/ability/'
-base_moves_url=fr'https://pokeapi.co/api/v2/move/'
-base_version_url=fr'https://pokeapi.co/api/v2/version/'
-total_pokemons=requests.get(url=base_url).json()['count']
+base_url=fr'https://pokeapi.co/api/v2/'
+base_poke_url=base_url+'pokemon/'
+base_ability_url=base_url+'ability/'
+base_moves_url=base_url+'move/'
+base_version_url=base_url+'version/'
+total_pokemons=requests.get(url=base_poke_url).json()['count']
 total_abilities=requests.get(url=base_ability_url).json()['count']
 total_moves=requests.get(url=base_moves_url).json()['count']
 total_versions=requests.get(url=base_version_url).json()['count']
@@ -38,7 +39,7 @@ total_versions=requests.get(url=base_version_url).json()['count']
 def safe_get(url, retries=3):
     for attempt in range(retries):
         try:
-            response = session.get(url, timeout=10)  # ← uses session here
+            response = session.get(url, timeout=10)
             if response.status_code == 429:
                 wait = int(response.headers.get('Retry-After', 60))
                 print(f"Rate limited. Waiting {wait}s...")
@@ -88,7 +89,6 @@ code_break = 0
 print(f"Total Version: {total_versions}")
 for version_id in range(total_versions + 1): # total_versions
     version_url=base_version_url+str(version_id)
-    # version_data=requests.get(version_url)
     version_data = safe_get(version_url)
     if version_data is None or version_data.status_code!=200:
         print(version_url)
@@ -125,7 +125,6 @@ code_break = 0
 print(f"Total Moves: {total_moves}")
 for move_id in range(total_moves + 1):
     move_url=base_moves_url+str(move_id)
-    # move_data=requests.get(move_url)
     move_data=safe_get(move_url)
     if move_data is None or move_data.status_code!=200:
         print(move_url)
@@ -206,7 +205,6 @@ code_break = 0
 print(f"Total Abilities: {total_abilities}")
 for ability_id in range(total_abilities + 1): # total_abilities
     ability_url=base_ability_url+str(ability_id)
-    # ability_data=requests.get(ability_url)
     ability_data=safe_get(ability_url)
     if ability_data is None or ability_data.status_code!=200:
         print(ability_url)
@@ -241,9 +239,8 @@ for ability_id in range(total_abilities + 1): # total_abilities
     
 code_break=0
 print(f"Total Pokemon: {total_pokemons}")   
-for i in range(total_pokemons + 1): # total_pokemons
-    pokemon_url=base_url+str(i)
-    # poke_fact=requests.get(pokemon_url)
+for i in range(total_pokemons + 1):
+    pokemon_url=base_poke_url+str(i)
     poke_fact=safe_get(pokemon_url)
     if poke_fact is None or poke_fact.status_code!=200:
         print(pokemon_url)
